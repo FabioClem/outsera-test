@@ -1,10 +1,6 @@
 # OutseraTest
 
-To see the running project go to
-
-## Development server
-
-To see a running development server, open in you browser:
+To see a running server, open in you browser:
 
 ```bash
 https://fabio-outsera-test.netlify.app/dashboard

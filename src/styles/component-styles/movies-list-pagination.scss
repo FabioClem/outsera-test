@@ -1,0 +1,62 @@
+.movies-list-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.pagination-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 1em;
+  border-radius: 6px;
+  border: none;
+  background: var(--color-bg-panel, #f3f6fa);
+  color: var(--color-text, #416191);
+  font-size: 1.08rem;
+  font-weight: 600;
+  box-shadow: 0 1.5px 6px 0 rgba(60, 60, 60, 0.07);
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid transparent;
+}
+.pagination-btn:hover:not([disabled]),
+.pagination-btn:focus-visible:not([disabled]) {
+  background: var(--primary-container, #e3eafc);
+  color: var(--primary, #416191);
+  border-color: var(--primary, #416191);
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.13);
+}
+.pagination-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #f0f0f0;
+  color: #aaa;
+}
+.pagination-btn.active,
+.pagination-btn[aria-current="page"] {
+  background: var(--primary, #416191);
+  color: var(--on-primary, #fff);
+  border-color: var(--primary, #416191);
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.18);
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .movies-list-pagination {
+    gap: 0.25rem;
+    margin-top: 1.2rem;
+  }
+  .pagination-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 0.98rem;
+    padding: 0 0.6em;
+  }
+}

@@ -1,0 +1,30 @@
+.movies-list-filters {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 700px) {
+  .movies-list-filters {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+}
+.filter-group select {
+  width: 100%;
+  padding: 0.7em 1em;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-border, #bfc7d1);
+  background: var(--color-bg-panel, #fff);
+  color: var(--color-text, #232a3a);
+  font-size: 1.08rem;
+  outline: none;
+  box-shadow: 0 1.5px 6px 0 rgba(60, 60, 60, 0.07);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.filter-group select:focus {
+  border-color: var(--primary, #416191);
+  box-shadow: 0 0 0 2px var(--primary-container, #d6e3ff);
+}

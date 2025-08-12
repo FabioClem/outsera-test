@@ -1,0 +1,65 @@
+@use "../dashboard/dashboard.component.scss" as *;
+@use "../../styles/component-styles/tudo-movies-list-toolbar.scss" as *;
+@use "../../styles/component-styles/tudo-movies-list-content.scss" as *;
+@use "../../styles/component-styles/tudo-movies-list-loading.scss" as *;
+.tudo-root {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+}
+
+.tudo-content {
+  flex: 1 1 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.tudo-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-toolbar, var(--primary));
+  color: var(--color-text-toolbar, var(--on-primary));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0 32px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+.tudo-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 1.3rem;
+  color: var(--color-text, #232a3a);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #1976d2;
+  border-top: 4px solid #e3eafc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

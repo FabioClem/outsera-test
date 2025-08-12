@@ -1,0 +1,52 @@
+@use "../../styles/component-styles/movies-list-modal.scss" as *;
+@use "../../styles/component-styles/movies-list-pagination.scss" as *;
+@use "../../styles/component-styles/movies-list-filters.scss" as *;
+@use "../../styles/component-styles/movies-list-table.scss" as *;
+
+.movies-list-root {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.movies-list-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-toolbar, var(--primary, #212121));
+  color: var(--color-text-toolbar, var(--on-primary, #fff));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0 32px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.movies-list-toolbar-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.movies-list-content {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  height: 100%;
+  padding: 24px;
+  color: var(--color-text);
+  background: var(--color-bg);
+  box-sizing: border-box;
+}
+
+.movies-list-panel {
+  padding: 1.5rem 1.2rem;
+  border: 2px solid var(--color-border, var(--outline-variant, #e0e0e0)) !important;
+  border-radius: 18px;
+  background: var(--color-bg-panel, #fff);
+  color: var(--color-text);
+  overflow-x: auto;
+  margin-bottom: 2em;
+}

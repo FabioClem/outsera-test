@@ -1,0 +1,31 @@
+@use "../../styles/component-styles/dashboard-toolbar.scss" as *;
+@use "../../styles/component-styles/dashboard-table.scss" as *;
+@use "../../styles/component-styles/dashboard-year-input.scss" as *;
+@use "../../styles/component-styles/dashboard-year-btn.scss" as *;
+@use "../../styles/component-styles/dashboard-form.scss" as *;
+@use "../../styles/component-styles/dashboard-panel-content-flex.scss" as *;
+
+.dashboard-root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.dashboard-panel {
+  padding: 1.5rem 1.2rem;
+  border: 2px solid var(--color-border, var(--outline-variant, #e0e0e0)) !important;
+  border-radius: 18px;
+  background: var(--color-bg-panel);
+  color: var(--color-text);
+  overflow-x: auto;
+  margin: 2em;
+}
+
+.dashboard-panel-title {
+  font-size: 1.18rem;
+  font-weight: 600;
+  margin-bottom: 1.1rem;
+  color: var(--color-text, #232a3a);
+}

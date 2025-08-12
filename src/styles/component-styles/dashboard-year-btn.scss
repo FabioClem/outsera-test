@@ -1,0 +1,71 @@
+.dashboard-year-btn {
+  margin-top: 0;
+  min-width: 120px;
+  height: 44px;
+  font-size: 1.08rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  background: var(--primary, #416191);
+  color: var(--on-primary, #fff);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  box-shadow: 0 2px 8px 0 rgba(60, 60, 60, 0.1);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.dashboard-year-btn:hover,
+.dashboard-year-btn:focus-visible {
+  background: color-mix(
+    in srgb,
+    var(--primary, #416191) 85%,
+    var(--primary-container, #d6e3ff) 15%
+  );
+  box-shadow: 0 3px 8px 0 rgba(25, 118, 210, 0.12);
+}
+
+.theme-dark .dashboard-year-btn:hover,
+.theme-dark .dashboard-year-btn:focus-visible {
+  background: color-mix(
+    in srgb,
+    var(--primary, #aac7ff) 80%,
+    var(--primary-container, #284777) 20%
+  );
+  box-shadow: 0 3px 8px 0 rgba(255, 215, 0, 0.18);
+}
+
+.dashboard-year-btn:active {
+  background: color-mix(
+    in srgb,
+    var(--primary, #416191) 70%,
+    var(--primary-container, #d6e3ff) 30%
+  );
+}
+
+.theme-dark .dashboard-year-btn:active {
+  background: color-mix(
+    in srgb,
+    var(--primary, #aac7ff) 65%,
+    var(--primary-container, #284777) 35%
+  );
+}
+
+.dashboard-year-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.dashboard-year-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

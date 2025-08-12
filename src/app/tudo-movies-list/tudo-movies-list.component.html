@@ -1,0 +1,19 @@
+<div class="dashboard-toolbar tudo-toolbar">
+  <span class="dashboard-toolbar-title">Chart geral</span>
+</div>
+
+<ng-container *ngIf="loading">
+  <div class="tudo-root tudo-loading-container">
+    <span class="spinner"></span>
+    <span>Carregando dados...</span>
+  </div>
+</ng-container>
+<ng-container *ngIf="error">{{ error }}</ng-container>
+
+<div class="tudo-root">
+  <div class="tudo-content">
+    <ng-container *ngIf="!loading && !error">
+      <app-pie-movies-per-year [movies]="movies"></app-pie-movies-per-year>
+    </ng-container>
+  </div>
+</div>

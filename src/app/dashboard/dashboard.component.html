@@ -1,0 +1,226 @@
+<div class="dashboard-root">
+  <div class="dashboard-toolbar">
+    <span class="dashboard-toolbar-title">Dashboard</span>
+  </div>
+  <div class="dashboard-content">
+    <div *ngIf="error" class="dashboard-error">
+      <span>{{ error }}</span>
+    </div>
+
+    <div class="dashboard-panels-grid">
+      <div class="dashboard-panel">
+        <div class="dashboard-panel-title">Anos com mais de um vencedor</div>
+        <div class="dashboard-panel-content-flex">
+          <div class="dashboard-table-container">
+            <ng-container *ngIf="loadingYears; else yearsLoaded">
+              <div class="dashboard-loading">
+                <span class="spinner"></span>
+                <span>Carregando...</span>
+              </div>
+            </ng-container>
+            <ng-template #yearsLoaded>
+              <table
+                class="dashboard-table"
+                *ngIf="yearsWithMultipleWinners.length > 0; else emptyYears"
+              >
+                <thead>
+                  <tr>
+                    <th>Ano</th>
+                    <th>Quantidade de vencedores</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of yearsWithMultipleWinners">
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.winnerCount }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-template>
+            <ng-template #emptyYears>
+              <div class="dashboard-empty">
+                Nenhum ano com mais de um vencedor.
+              </div>
+            </ng-template>
+          </div>
+          <div class="dashboard-piechart-container">
+            <app-pie-chart-highchart
+              [data]="yearsWithMultipleWinners"
+            ></app-pie-chart-highchart>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-panel">
+        <div class="dashboard-panel-title">
+          Top 3 estúdios com mais vitórias
+        </div>
+        <div class="dashboard-panel-content-flex">
+          <div class="dashboard-table-container">
+            <ng-container *ngIf="loadingStudios; else studiosLoaded">
+              <div class="dashboard-loading">
+                <span class="spinner"></span>
+                <span>Carregando...</span>
+              </div>
+            </ng-container>
+            <ng-template #studiosLoaded>
+              <table
+                class="dashboard-table"
+                *ngIf="topStudios.length > 0; else emptyStudios"
+              >
+                <thead>
+                  <tr>
+                    <th>Estúdio</th>
+                    <th>Vitórias</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let studio of topStudios">
+                    <td>{{ studio.name }}</td>
+                    <td>{{ studio.winCount }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-template>
+            <ng-template #emptyStudios>
+              <div class="dashboard-empty">Nenhum estúdio encontrado.</div>
+            </ng-template>
+          </div>
+          <div class="dashboard-piechart-container">
+            <app-bar-chart-highchart
+              [data]="topStudios"
+            ></app-bar-chart-highchart>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-panel">
+        <div class="dashboard-panel-title">
+          Produtores com maior e menor intervalo entre vitórias
+        </div>
+        <ng-container *ngIf="loadingIntervals">
+          <div class="dashboard-loading">
+            <span class="spinner"></span>
+            <span>Carregando...</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!loadingIntervals">
+          <div class="dashboard-subtitle">Maior intervalo</div>
+          <table
+            class="dashboard-table"
+            *ngIf="maxIntervals.length > 0; else emptyMaxIntervals"
+          >
+            <thead>
+              <tr>
+                <th>Produtor</th>
+                <th>Intervalo</th>
+                <th>Ano anterior</th>
+                <th>Ano seguinte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of maxIntervals">
+                <td>{{ item.producer }}</td>
+                <td>{{ item.interval }}</td>
+                <td>{{ item.previousWin }}</td>
+                <td>{{ item.followingWin }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #emptyMaxIntervals>
+            <div class="dashboard-empty">Nenhum produtor encontrado.</div>
+          </ng-template>
+          <div class="dashboard-subtitle">Menor intervalo</div>
+          <table
+            class="dashboard-table"
+            *ngIf="minIntervals.length > 0; else emptyMinIntervals"
+          >
+            <thead>
+              <tr>
+                <th>Produtor</th>
+                <th>Intervalo</th>
+                <th>Ano anterior</th>
+                <th>Ano seguinte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of minIntervals">
+                <td>{{ item.producer }}</td>
+                <td>{{ item.interval }}</td>
+                <td>{{ item.previousWin }}</td>
+                <td>{{ item.followingWin }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #emptyMinIntervals>
+            <div class="dashboard-empty">Nenhum produtor encontrado.</div>
+          </ng-template>
+        </ng-container>
+      </div>
+      <div class="dashboard-panel">
+        <div class="dashboard-panel-title">Vencedores por ano</div>
+        <form
+          #form="ngForm"
+          (ngSubmit)="buscarVencedoresPorAno()"
+          class="dashboard-form"
+        >
+          <div class="dashboard-year-input">
+            <label for="searchYear">Ano</label>
+            <input
+              type="number"
+              id="searchYear"
+              [(ngModel)]="searchYear"
+              name="searchYear"
+              placeholder="Digite o ano (ex: 2000)"
+              min="1900"
+              max="2100"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="dashboard-year-btn"
+            [disabled]="form.invalid"
+            aria-label="Buscar por ano"
+          >
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Buscar
+          </button>
+        </form>
+
+        <ng-container *ngIf="loadingWinnersByYear">
+          <div class="dashboard-loading">
+            <span class="spinner"></span>
+            <span>Carregando...</span>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="!loadingWinnersByYear">
+          <table
+            class="dashboard-table"
+            *ngIf="winnersByYear.length > 0; else emptyWinners"
+          >
+            <thead>
+              <tr>
+                <th>Ano</th>
+                <th>Título</th>
+                <th>Estúdios</th>
+                <th>Produtores</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movie of winnersByYear">
+                <td>{{ movie.year }}</td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.studios.join(", ") }}</td>
+                <td>{{ movie.producers.join(", ") }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <ng-template #emptyWinners>
+            <div class="dashboard-empty">
+              Nenhum vencedor encontrado para o ano informado.
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

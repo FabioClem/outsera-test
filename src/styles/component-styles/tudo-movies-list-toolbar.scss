@@ -1,0 +1,12 @@
+.tudo-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--color-bg-toolbar, var(--primary));
+  color: var(--color-text-toolbar, var(--on-primary));
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0 32px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}

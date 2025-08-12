@@ -1,0 +1,12 @@
+.tudo-content {
+  flex: 1 1 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}

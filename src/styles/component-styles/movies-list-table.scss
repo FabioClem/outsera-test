@@ -1,0 +1,51 @@
+table.movies-list-table {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-bg-table, var(--surface, #fff));
+  color: var(--color-text, var(--on-surface, #232a3a));
+  margin-bottom: 1.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border-collapse: collapse;
+  border: 1.5px solid var(--color-border, var(--outline-variant, #e0e0e0));
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.07);
+  transition: background 0.3s, color 0.3s;
+  width: 100%;
+  min-width: 400px;
+}
+table.movies-list-table th {
+  background: var(--color-table-header, var(--primary-container, #e3eafc));
+  color: var(--color-table-header-text, var(--on-primary-container, #001b3e));
+  font-weight: 700;
+  font-size: 1.08rem;
+  border-bottom: 2px solid var(--color-border, var(--outline, #e0e0e0));
+  border-right: 1.5px solid var(--color-border, var(--outline-variant, #e0e0e0));
+  padding: 0.7em 1.1em;
+  text-align: left;
+}
+table.movies-list-table th:last-child {
+  border-right: none;
+}
+table.movies-list-table td {
+  color: var(--color-text, var(--on-surface, #232a3a));
+  font-size: 1rem;
+  background: transparent;
+  text-align: left;
+  padding: 0.7em 1.1em;
+  border-bottom: 1px solid var(--color-border, var(--outline-variant, #e0e0e0));
+  border-right: 1px solid var(--color-border, var(--outline-variant, #e0e0e0));
+  vertical-align: middle;
+}
+table.movies-list-table td:last-child {
+  border-right: none;
+}
+table.movies-list-table tbody tr:last-child td {
+  border-bottom: none;
+}
+table.movies-list-table tbody tr:nth-child(even) td {
+  background: var(--color-bg-panel, #f5f5f5);
+}
+table.movies-list-table tbody tr:hover td {
+  background: var(--primary-container, #e3eafc);
+  color: var(--on-primary-container, #001b3e);
+}

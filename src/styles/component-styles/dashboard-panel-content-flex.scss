@@ -1,0 +1,32 @@
+.dashboard-panel-content-flex {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.dashboard-table-container {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.dashboard-piechart-container {
+  flex: 0 0 420px;
+  min-width: 260px;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .dashboard-panel-content-flex {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .dashboard-piechart-container {
+    max-width: 100%;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

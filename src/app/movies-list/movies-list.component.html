@@ -1,0 +1,173 @@
+<div class="movies-list-root">
+  <div class="movies-list-toolbar">
+    <span class="movies-list-toolbar-title">Lista de Filmes</span>
+  </div>
+  <div class="movies-list-content">
+    <div class="movies-list-panels-grid">
+      <div class="movies-list-panel">
+        <div
+          *ngIf="loading"
+          class="movies-list-loading movies-list-loading-center"
+        >
+          <span class="spinner"></span>
+          <span>Carregando filmes...</span>
+        </div>
+        <div *ngIf="error" class="movies-list-error">
+          <span class="icon-error">!</span>
+          <span>{{ error }}</span>
+        </div>
+        <div *ngIf="!loading && !error" class="movies-list-container">
+          <div
+            class="movies-list-filters filters-inline"
+            style="gap: 1rem; margin-bottom: 1.5rem"
+          >
+            <div class="filter-group">
+              <label for="year-select">Ano</label>
+              <select
+                id="year-select"
+                [(ngModel)]="selectedYear"
+                (change)="onFilterChange()"
+                name="year"
+              >
+                <option value="">Todos</option>
+                <option *ngFor="let year of years" [value]="year">
+                  {{ year }}
+                </option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="winner-select">Vencedor</label>
+              <select
+                id="winner-select"
+                [(ngModel)]="selectedWinner"
+                (change)="onFilterChange()"
+                name="winner"
+              >
+                <option value="">Todos</option>
+                <option value="sim">Sim</option>
+                <option value="nao">Não</option>
+              </select>
+            </div>
+          </div>
+
+          <table class="mat-elevation-z1 movies-list-table" *ngIf="!loading">
+            <thead>
+              <tr>
+                <th>Ano</th>
+                <th>Título</th>
+                <th>Estúdios</th>
+                <th>Produtores</th>
+                <th>Vencedor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let movie of pagedMovies"
+                (click)="openMovieModal(movie)"
+                style="cursor: pointer"
+              >
+                <td>{{ movie.year }}</td>
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.studios.join(", ") }}</td>
+                <td>{{ movie.producers.join(", ") }}</td>
+                <td>{{ movie.winner ? "Sim" : "Não" }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div
+            *ngIf="showModal && selectedMovie"
+            class="movie-modal-backdrop"
+            (click)="closeModal()"
+          >
+            <div class="movie-modal" (click)="$event.stopPropagation()">
+              <button
+                class="modal-close-btn"
+                (click)="closeModal()"
+                aria-label="Fechar"
+              >
+                &times;
+              </button>
+              <h2>{{ selectedMovie.title }}</h2>
+              <p><strong>Ano:</strong> {{ selectedMovie.year }}</p>
+              <p>
+                <strong>Estúdios:</strong>
+                {{ selectedMovie.studios.join(", ") }}
+              </p>
+              <p>
+                <strong>Produtores:</strong>
+                {{ selectedMovie.producers.join(", ") }}
+              </p>
+              <p>
+                <strong>Vencedor:</strong>
+                {{ selectedMovie.winner ? "Sim" : "Não" }}
+              </p>
+              <!-- Adicione mais informações detalhadas aqui se necessário -->
+            </div>
+          </div>
+
+          <div class="movies-list-pagination">
+            <button
+              class="pagination-btn"
+              (click)="goToPage(currentPage - 1)"
+              [disabled]="currentPage === 1"
+            >
+              &#x25C0; Anterior
+            </button>
+            <ng-container *ngIf="totalPages > 5">
+              <button
+                *ngIf="getPaginationPages()[0] > 1"
+                class="pagination-btn"
+                disabled
+                style="
+                  pointer-events: none;
+                  background: none;
+                  color: #888;
+                  box-shadow: none;
+                "
+              >
+                ...
+              </button>
+            </ng-container>
+            <ng-container *ngFor="let page of getPaginationPages()">
+              <button
+                class="pagination-btn"
+                [class.active]="currentPage === page"
+                [attr.aria-current]="currentPage === page ? 'page' : null"
+                (click)="goToPage(page)"
+                [disabled]="currentPage === page"
+              >
+                {{ page }}
+              </button>
+            </ng-container>
+            <ng-container *ngIf="totalPages > 5">
+              <button
+                *ngIf="
+                  getPaginationPages()[getPaginationPages().length - 1] <
+                  totalPages
+                "
+                class="pagination-btn"
+                disabled
+                style="
+                  pointer-events: none;
+                  background: none;
+                  color: #888;
+                  box-shadow: none;
+                "
+              >
+                ...
+              </button>
+            </ng-container>
+            <button
+              class="pagination-btn"
+              (click)="goToPage(currentPage + 1)"
+              [disabled]="currentPage === totalPages"
+            >
+              Próxima &#x25B6;
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

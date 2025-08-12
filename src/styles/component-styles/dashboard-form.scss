@@ -1,0 +1,17 @@
+.dashboard-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 3rem;
+  margin-bottom: 1.2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (max-width: 600px) {
+  .dashboard-form {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 100%;
+  }
+}
